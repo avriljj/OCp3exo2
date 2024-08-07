@@ -14,18 +14,41 @@ public class Task {
     /**
      * Variable Date limite
      */
-    private Date deadline;
+
+    private Date dueTime;
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return Objects.equals(description, task.description) && Objects.equals(dueTime, task.dueTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, dueTime);
+    }
 
     /**
-     * Constructeur pour créer une nouvelle tâche avec une description.
+
+     * Constructeur pour créer une nouvelle tâche avec sa description et sa date d'échéance.
+
      *
+
      * @param description La description de la tâche.
+
+     * @param dueTime La date d'échéance de la tâche.
+
      */
-    public Task(String description) {
+
+    public Task(String description, Date dueTime) {
+
         this.description = description;
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, 10);
-        this.deadline = calendar.getTime();
+
+        this.dueTime = dueTime;
+
     }
 
     /**
@@ -46,48 +69,32 @@ public class Task {
         this.description = description;
     }
 
-    /**
-     * Vérifie si deux objets Task sont égaux en comparant leurs descriptions.
-     *
-     * @param o L'objet à comparer.
-     * @return Vrai si les descriptions sont égales, sinon faux.
-     */
 
     /**
-     * Obtient la date limite de la tâche.
+
+     * Obtient la date d'échéance de la tâche.
+
      *
-     * @return La date limite de la tâche.
+
+     * @return La date d'échéance de la tâche.
+
      */
-    public String getDeadline() {
-        Date currentDate = new Date();
-        long diffInMillies = deadline.getTime() - currentDate.getTime();
-        long daysLeft = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-        return daysLeft + " days left";
+
+    public Date getDueTime() {
+
+        return dueTime;
+
     }
 
     /**
      * Modifie la date limite de la tâche.
      *
-     * @param deadline La nouvelle date limite de la tâche.
+     * @param dueTime La nouvelle date limite de la tâche.
      */
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
-    }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Task task = (Task) o;
-        return Objects.equals(description, task.description);
+    public void setDueTime(Date dueTime) {
+
+        this.dueTime = dueTime;
+
     }
 
-    /**
-     * Calcule le code de hachage en utilisant la description de la tâche.
-     *
-     * @return Le code de hachage calculé.
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(description);
-    }
 }
