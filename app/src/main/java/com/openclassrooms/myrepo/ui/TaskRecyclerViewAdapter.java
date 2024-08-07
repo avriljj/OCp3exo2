@@ -41,6 +41,7 @@ public class TaskRecyclerViewAdapter extends ListAdapter<Task, TaskRecyclerViewA
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView factTextView;
+        private final TextView deadlineTextView;
 
         /**
          * Constructeur du ViewHolder.
@@ -48,6 +49,7 @@ public class TaskRecyclerViewAdapter extends ListAdapter<Task, TaskRecyclerViewA
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             factTextView = itemView.findViewById(R.id.task_description);
+            deadlineTextView = itemView.findViewById(R.id.deadline);
         }
 
         /**
@@ -57,6 +59,7 @@ public class TaskRecyclerViewAdapter extends ListAdapter<Task, TaskRecyclerViewA
          */
         public void bind(Task task) {
             factTextView.setText(task.getDescription());
+            deadlineTextView.setText(task.getDeadline());
         }
     }
 
